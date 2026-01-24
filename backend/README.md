@@ -4,3 +4,4 @@ initialize node project
 install packages
 2 npm install express dotenv cors mongoose jsonwebtoken bcryptjs socket.io
 3 npm install -D nodemon
+4 npm install cors
