@@ -7,7 +7,7 @@ function Login(){
     const [password,setPassword]=useState("");
     const [error,setError]=useState(true)
     const [message,setMessage]=useState("") 
-    // const navigate=useNavigate()
+    const navigate=useNavigate()
 
     const Submit = async(e)=>{
         e.preventDefault();
@@ -21,6 +21,17 @@ function Login(){
 
             setMessage(`Welcom ${email}`)
 
+            const role=res.data.user.role;
+
+            if(role === "client"){
+              navigate("/client/dashboard")
+            }else if(role === "agent"){
+              navigate("/agent/dashboard")
+            }else if(role === "admin"){
+              navigate("/admin/dashboard")
+            }else{
+              navigate("/pagerror")
+            }
         } catch(e){
           setError(false)
             setMessage("Email or password is good")
