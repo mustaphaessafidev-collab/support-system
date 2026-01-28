@@ -24,7 +24,7 @@ function Login(){
             const role=res.data.user.role;
 
             if(role === "client"){
-              navigate("/client/dashboard")
+              navigate("/client/AddTickets")
             }else if(role === "agent"){
               navigate("/agent/dashboard")
             }else if(role === "admin"){
