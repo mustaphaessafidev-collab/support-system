@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
-import PageError from "./layouts/PageError404";
+
 import Admin from "./pages/admin/dashboard";
 import Agent from "./pages/agent/dashboard";
 import Client from "./pages/client/dashboard";
@@ -9,6 +9,7 @@ import AddTickets from "./pages/client/addtickets";
 import AdminLayout from "./layouts/AdminLayout";
 import AgentLayout from "./layouts/AgentLayout";
 import ClientLayout from "./layouts/ClientLayout";
+import AddAgents from "./pages/admin/AddAgente";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
     <Route path="/admin" element={<AdminLayout />}>
         <Route path="dashboard" element={<Admin />} />
+        <Route path="AddAgent" element={<AddAgents />} />
     </Route>
 
     <Route path="/agent" element={<AgentLayout />}>
@@ -30,11 +32,7 @@ function App() {
         <Route path="AddTickets" element={<AddTickets />} />
     </Route>
 
-      {/* <Route path="/pagerror" element={<PageError />} />
-      <Route path="/admin/dashboard" element={<Admin />} />
-      <Route path="/agent/dashboard" element={<Agent />} />
-      <Route path="/client/dashboard" element={<Client />} />
-      <Route path="/client/AddTickets" element={<AddTickets />} /> */}
+  
     </Routes>
   );
 }
