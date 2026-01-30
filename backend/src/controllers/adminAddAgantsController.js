@@ -39,5 +39,15 @@ const AddAgentgs= async(req,res)=>{
         res.status(500).json({message:'function add agent is not work'})
     }
 }
+const getAgent= async(req,res)=>{
 
-module.exports= AddAgentgs;
+    try{
+        const agent = await Users.find({role:'agent'}).select("-password")
+        res.json({agent})
+    }catch(e){
+        res.status(500).json({message:'agent is not get all'})
+    }
+
+
+}
+module.exports= {AddAgentgs,getAgent};

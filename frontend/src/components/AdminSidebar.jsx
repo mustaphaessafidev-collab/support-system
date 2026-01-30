@@ -8,7 +8,7 @@ export default function AdminSidebar() {
       <ul className="space-y-3">
         <li><Link to="/admin/dashboard">Dashboard</Link></li>
         <li><Link to="/admin/AddAgent">Add Agent</Link></li>
-        <li><Link to="/admin/tickets">Tickets</Link></li>
+        <li><Link to="/admin/AgentList">AgentList</Link></li>
       </ul>
     </div>
   );

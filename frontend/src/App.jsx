@@ -10,6 +10,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import AgentLayout from "./layouts/AgentLayout";
 import ClientLayout from "./layouts/ClientLayout";
 import AddAgents from "./pages/admin/AddAgente";
+import AgentList from "./pages/admin/Agent";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
     <Route path="/admin" element={<AdminLayout />}>
         <Route path="dashboard" element={<Admin />} />
         <Route path="AddAgent" element={<AddAgents />} />
+        <Route path="AgentList" element={<AgentList />} />
     </Route>
 
     <Route path="/agent" element={<AgentLayout />}>
