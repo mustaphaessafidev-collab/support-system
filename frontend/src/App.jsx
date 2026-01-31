@@ -11,6 +11,7 @@ import AgentLayout from "./layouts/AgentLayout";
 import ClientLayout from "./layouts/ClientLayout";
 import AddAgents from "./pages/admin/AddAgente";
 import AgentList from "./pages/admin/Agent";
+import ListCliten from "./pages/admin/ListClients";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="dashboard" element={<Admin />} />
         <Route path="AddAgent" element={<AddAgents />} />
         <Route path="AgentList" element={<AgentList />} />
+        <Route path="ClitenList" element={<ListCliten />} />
     </Route>
 
     <Route path="/agent" element={<AgentLayout />}>

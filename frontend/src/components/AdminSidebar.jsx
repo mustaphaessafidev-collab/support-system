@@ -9,6 +9,7 @@ export default function AdminSidebar() {
         <li><Link to="/admin/dashboard">Dashboard</Link></li>
         <li><Link to="/admin/AddAgent">Add Agent</Link></li>
         <li><Link to="/admin/AgentList">AgentList</Link></li>
+        <li><Link to="/admin/ClitenList">Cliten List</Link></li>
       </ul>
     </div>
   );
