@@ -50,4 +50,18 @@ const getAgent= async(req,res)=>{
 
 
 }
-module.exports= {AddAgentgs,getAgent};
+const DeteleAgent=async(req,res)=>{
+    try{
+
+        const { id }=req.params
+        const Agent =await Users.findByIdAndDelete(id);
+
+        if(!Agent){
+            res.status(404).json({message:'agnet is not found'})
+        }
+        res.status(200).json({meesage:'agente is delete good'})
+    }catch(e){
+        res.status(500).json({message:'error in delete agent ',e})
+    }
+}
+module.exports= {AddAgentgs,getAgent,DeteleAgent};

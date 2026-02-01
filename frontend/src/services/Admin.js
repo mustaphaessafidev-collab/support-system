@@ -14,3 +14,6 @@ API.interceptors.request.use((req)=>{
 export const addAgent=(data)=> API.post("/addAgents/addAgent",data)
 export const getAgent=(data)=> API.get("/addAgents/getAgent",data)
 export const getClient=(data)=> API.get("/addAgents/getClient",data)
+
+export const deleteAgent =(id)=> API.delete(`/addAgents/Agent/${id}`)
+export const deleteClients=(id)=> API.delete(`/addAgents/deleteClients/${id}`)

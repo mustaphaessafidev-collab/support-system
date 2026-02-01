@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAgent } from '../../services/Admin';
+import { deleteAgent, getAgent } from '../../services/Admin';
 
 const AgentList = () => {
     const [data,setData]=useState([]);
@@ -31,6 +31,17 @@ const AgentList = () => {
     useEffect(()=>{
         fetAgent();
     },[])
+
+    const deletea=async(id,name)=>{
+        if(!window.confirm(`are you sure to delete ${name}`)) return;
+
+        try{
+            await deleteAgent(id);
+            fetAgent();
+        }catch(e){
+            alert('error to delete agent tyr')
+        }
+    }
     
 
   return (
@@ -54,6 +65,8 @@ const AgentList = () => {
                 <td class="p-4 text-sm">{r.email}</td>
                 <td class="p-4 text-sm">{r.role}</td>
                 <td class="p-4 text-sm">{r.status}</td>
+                <td class="p-4 text-sm"><button class="bg-red-500 text-white px-3 py-1 rounded-md text-xs md:text-sm" onClick={()=>deletea(r._id,r.name)}>Delete </button></td>
+
             </tr>
             ))}
             

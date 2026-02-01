@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getClient } from '../../services/Admin';
+import { deleteClients, getClient } from '../../services/Admin';
 
 const ListCliten = () => {
     const [data,setData]=useState([]);
@@ -31,6 +31,18 @@ const ListCliten = () => {
     useEffect(()=>{
         fetAgent();
     },[])
+
+    const deletea=async(id,name)=>{
+        if(!window.confirm(`are you sure to delete ${name}`)) return;
+
+        try{
+            await deleteClients(id)
+            fetAgent();
+            alert('cliter is delete ')
+        }catch(e){
+            alert('eroor is delete cliter')
+        }
+    }
     
 
   return (
@@ -54,6 +66,7 @@ const ListCliten = () => {
                 <td class="p-4 text-sm">{r.email}</td>
                 <td class="p-4 text-sm">{r.role}</td>
                 <td class="p-4 text-sm">{r.status}</td>
+                <td class="p-4 text-sm"><button class="bg-red-500 text-white px-3 py-1 rounded-md text-xs md:text-sm" onClick={()=>deletea(r._id,r.name)}>Delete </button></td>
             </tr>
             ))}
             
