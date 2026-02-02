@@ -2,10 +2,10 @@ const mongoose=require('mongoose');
 
 const ticketsSchema=new mongoose.Schema({
     
-    ClientId:{
+    client:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
-        require:true
+        required:true
     },
     agent:{
         type:mongoose.Schema.Types.ObjectId,
@@ -15,15 +15,15 @@ const ticketsSchema=new mongoose.Schema({
     status:{
         type:String,
         enum:['open','in progress','closed'],
-        delete:'open'
+        default:'open'
     },
     title:{
         type:String,
-        require:true,
+        required:true,
     },
     description:{
         type:String, 
-        require:true,
+        required:true,
     },
     image:{
         type:String,
