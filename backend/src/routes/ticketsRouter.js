@@ -8,5 +8,5 @@ const isClient = require('../middlewares/isClientMiddleware');
 
 const router =express.Router();
 router.post('/addtickets',protect,AddTickets)
-router.get('/getatickets',protect,getTickets)
+router.get('/',protect,getTickets)
 module.exports=router

@@ -12,6 +12,7 @@ import ClientLayout from "./layouts/ClientLayout";
 import AddAgents from "./pages/admin/AddAgente";
 import AgentList from "./pages/admin/Agent";
 import ListCliten from "./pages/admin/ListClients";
+import MyTickets from "./pages/client/MyTickets";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
       <Route path="/client" element={<ClientLayout />}>
         <Route path="dashboard" element={<Client />} />
         <Route path="AddTickets" element={<AddTickets />} />
+        <Route path="MyTickets" element={<MyTickets />} />
     </Route>
 
   
