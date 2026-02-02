@@ -27,18 +27,25 @@ const AddTickets=async (req,res)=>{
     
 
 }
-// const getTickets=async(req,res)=>{
-    
-//     if(req.user.role !== 'client'){
-//         return res.status(403).json({
-//             message:'only client can see Tickets'
-//         })
-//     }
 
-//     const tickets= await Tickets.findById({
-//         user:req.user.id
-//     })
-   
+const getTickets=async(req,res)=>{
+        try{
+            if(req.user.role !== 'client'){
+            return res.status(403).json({
+                message:'only client can see Tickets'
+            })
+        }
 
-// }
-module.exports={AddTickets}
+        const tickets= await Tickets.find({
+            client:req.user.id
+        })
+        
+        res.status(200).json({tickets})
+        }catch(e){
+            res.status(500).json({message:e.message})
+        }
+        
+        
+
+}
+module.exports={AddTickets,getTickets}
