@@ -7,7 +7,7 @@ export default function AgentSidebar(){
 
       <ul className="space-y-3">
         <li><Link to="/agent/dashboard">ALL Tickets</Link></li>
-        <li><Link to="/agent/users">My Tickets</Link></li>
+        <li><Link to="/agent/alltickets">My Tickets</Link></li>
         <li><Link to="/agent/tickets">message</Link></li>
       </ul>
     </div>

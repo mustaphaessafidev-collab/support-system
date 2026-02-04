@@ -1,9 +1,7 @@
 import axios from "axios";
-
-const API = axios.create({
+const API =axios.create({
     baseURL:"http://localhost:5000/api",
 })
-
 API.interceptors.request.use((req)=>{
     const token =localStorage.getItem("token")
 
@@ -13,6 +11,4 @@ API.interceptors.request.use((req)=>{
     return req
 })
 
-export const addtickets=(data)=> API.post("/tickets/",data)
-
-export const gettickts = () => API.get("/tickets");
+export const gettickts=()=> API.get("/addAgents/agent");
