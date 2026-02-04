@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { gettickts } from '../../services/Tickets';
+import { getMytickts } from '../../services/Tickets';
 const MyTickets = () => {
     const [tickets,setTickets]=useState([])
 
     const getMyTickets =async()=>{
         try{
 
-            const res=await gettickts()
+            const res=await getMytickts()
 
             let ListTickets =[]
             if(res?.data){
