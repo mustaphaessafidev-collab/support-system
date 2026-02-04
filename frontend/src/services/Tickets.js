@@ -16,3 +16,5 @@ API.interceptors.request.use((req)=>{
 export const addtickets=(data)=> API.post("/tickets/",data)
 
 export const getMytickts = () => API.get("/tickets/my");
+
+export const getAllTickes=() => API.get("/tickets/all");

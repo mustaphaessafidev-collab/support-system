@@ -20,10 +20,6 @@ const addTickets=async(req,res)=>{
 
 const getMyTickets=async(req,res)=>{
     try{
-
-    
-    
-
     const tickets= await Tickets.find({
         client:req.user.id
     })
@@ -36,4 +32,13 @@ const getMyTickets=async(req,res)=>{
 
 }
 
-module.exports={addTickets,getMyTickets}
+const getAllTickes=async(req,res)=>{
+    try{
+        const tickets = await Tickets.find({})
+        res.status(201).json({tickets})
+    }catch(error){
+        res.sttatus(500).json({meesage:error.meesage})
+    }
+}
+
+module.exports={addTickets,getMyTickets,getAllTickes}

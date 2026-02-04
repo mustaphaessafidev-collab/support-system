@@ -1,10 +1,10 @@
 const express =require('express')
 
 const protect = require('../middlewares/authMiddleware');
-const { AddTickets, getTickets } = require('../controllers/clientsTicketsController');
 const isClient = require('../middlewares/isClientMiddleware');
 const { route } = require('./agentRouter');
-const { addTickets, getMyTickets } = require('../controllers/ticketController');
+const { addTickets, getMyTickets, getAllTickes } = require('../controllers/ticketController');
+const isAdmin = require('../middlewares/adminMiddleware');
 
 
 
@@ -13,4 +13,6 @@ const router =express.Router();
 router.post('/',protect,isClient,addTickets)
 // get tickets of clients jast
 router.get('/my',protect,isClient,getMyTickets)
+// get all tickets for Admin
+router.get('/all',protect,isAdmin,getAllTickes)
 module.exports=router
