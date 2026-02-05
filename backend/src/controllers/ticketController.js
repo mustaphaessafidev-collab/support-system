@@ -1,3 +1,4 @@
+
 const Tickets = require("../models/Tickets")
 
 
@@ -54,5 +55,26 @@ const getTcketsByAgents=async(req,res)=>{
     }       
 }
 
+const TakingTicketsAgent =async(req,res)=>{
+    try{
+        const tickets=await Tickets.findOneAndUpdate(
+            {_id:req.params.id,agent:null},
+            {
+            agent:req.user.id,
+            status:'in progress'
+            },
+            {new:true}
+        )
+        if(!tickets){
+            return res.status(400).json({message:'Tickets already taken'})
+        }
 
-module.exports={addTickets,getMyTickets,getAllTickes,getTcketsByAgents}
+        res.status(200).json({tickets})
+
+    }catch(error){
+        res.status(500).json({message:error.meesage})
+    }
+}
+
+
+module.exports={addTickets,getMyTickets,getAllTickes,getTcketsByAgents,TakingTicketsAgent}

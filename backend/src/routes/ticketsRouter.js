@@ -3,7 +3,7 @@ const express =require('express')
 const protect = require('../middlewares/authMiddleware');
 const isClient = require('../middlewares/isClientMiddleware');
 const { route } = require('./agentRouter');
-const { addTickets, getMyTickets, getAllTickes, getTcketsByAgents } = require('../controllers/ticketController');
+const { addTickets, getMyTickets, getAllTickes, getTcketsByAgents, TakingTicketsAgent } = require('../controllers/ticketController');
 const isAdmin = require('../middlewares/adminMiddleware');
 
 
@@ -17,4 +17,6 @@ router.get('/my',protect,isClient,getMyTickets)
 router.get('/all',protect,isAdmin,getAllTickes)
 
 router.get('/agent',protect,getTcketsByAgents)
+
+router.put('/update/:id',protect,TakingTicketsAgent)
 module.exports=router
