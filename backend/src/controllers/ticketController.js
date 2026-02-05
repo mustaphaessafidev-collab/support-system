@@ -69,12 +69,28 @@ const TakingTicketsAgent =async(req,res)=>{
             return res.status(400).json({message:'Tickets already taken'})
         }
 
-        res.status(200).json({tickets})
+        res.status(203).json({tickets})
 
     }catch(error){
         res.status(500).json({message:error.meesage})
     }
 }
 
+const getMyTicketsAgenten=async(req,res)=>{
 
-module.exports={addTickets,getMyTickets,getAllTickes,getTcketsByAgents,TakingTicketsAgent}
+    try{
+        const tickets =await Tickets.find({
+        agent:req.user.id
+        }).populate('client','name email')
+        if(!tickets){
+            return res.status(400).json({message:'yuo dont hava any ticket'})
+        }
+
+        res.status(200).json({tickets})
+    }catch(e){
+        res.status(500).json({message:e.meesage})
+    }
+    
+}
+
+module.exports={addTickets,getMyTickets,getAllTickes,getTcketsByAgents,TakingTicketsAgent,getMyTicketsAgenten}

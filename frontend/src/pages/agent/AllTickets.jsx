@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { getAllAgetTickets } from "../../services/Tickets"
+import { getAllAgetTickets, TakingTicketsAgent } from "../../services/Tickets"
+import { cache } from "react"
 
 
 const AllTickets=()=>{
@@ -25,6 +26,19 @@ const AllTickets=()=>{
         }catch(e){
             console.log("error in get agent ",e)
         }
+    }
+    const ticket=async(id)=>{
+      if(!window.confirm("do yo want to take this ticket ")) return;
+
+      try{
+        await TakingTicketsAgent(id)
+        gettickts()
+        alert("ticket is ticke for you")
+      }catch(e){
+        alert("error in ticket ticket",e)
+        
+      }
+
     }
 
     useEffect(()=>{
@@ -55,11 +69,13 @@ const AllTickets=()=>{
         {r.agent ? r.agent : 'Not assigned'}
       </td>
       <td className="p-4 text-sm">{r.status}</td>
+      <td class="p-4 text-sm"><button class="bg-red-500 text-white px-3 py-1 rounded-md text-xs md:text-sm" onClick={()=>ticket(r._id)}>ticket   </button></td>
+
     </tr>
   ))}
 </tbody>
 
-        </table>
+</table>
         
         
         </>

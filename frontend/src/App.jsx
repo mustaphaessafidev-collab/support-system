@@ -15,6 +15,7 @@ import ListCliten from "./pages/admin/ListClients";
 import MyTickets from "./pages/client/MyTickets";
 import AllTickets from "./pages/agent/AllTickets";
 import TicketsAdmin from "./pages/admin/Tickets";
+import MyTicketsAgent from "./pages/agent/MyTickets";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
     <Route path="/agent" element={<AgentLayout />}>
         <Route path="dashboard" element={<Agent />} />
         <Route path="alltickets" element={<AllTickets />} />
+        <Route path="MyTickets" element={<MyTicketsAgent />} />
     </Route>
 
       <Route path="/client" element={<ClientLayout />}>

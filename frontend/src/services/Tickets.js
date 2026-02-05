@@ -19,4 +19,8 @@ export const getMytickts = () => API.get("/tickets/my");
 
 export const getAllTickes=() => API.get("/tickets/all");
 
-export const getAllAgetTickets=()=> API.get("tickets/agent")
+export const getAllAgetTickets=()=> API.get("/tickets/agent")
+
+export const TakingTicketsAgent=(id)=> API.put(`/tickets/update/${id}`)
+
+export const getMyTicketsAgenten=()=> API.get("/tickets/tkagent")

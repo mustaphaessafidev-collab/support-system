@@ -6,9 +6,9 @@ export default function AgentSidebar(){
       <h2 className="text-xl font-bold mb-6">Agent Panel</h2>
 
       <ul className="space-y-3">
-        <li><Link to="/agent/dashboard">ALL Tickets</Link></li>
-        <li><Link to="/agent/alltickets">My Tickets</Link></li>
-        <li><Link to="/agent/tickets">message</Link></li>
+        <li><Link to="/agent/dashboard">dashbord</Link></li>
+        <li><Link to="/agent/alltickets">All Tickets</Link></li>
+        <li><Link to="/agent/MyTickets">My Tickets</Link></li>
       </ul>
     </div>
     )
