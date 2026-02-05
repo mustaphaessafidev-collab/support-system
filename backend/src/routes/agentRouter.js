@@ -3,7 +3,6 @@ const  {AddAgentgs,getAgent, DeteleAgent}  = require('../controllers/adminAgants
 const protect = require('../middlewares/authMiddleware');
 const isAdmin = require('../middlewares/adminMiddleware');
 const { getClintes, deleteClients } = require('../controllers/adminClinteController');
-const getAllTickets = require('../controllers/agentsController');
 
 
 
@@ -17,5 +16,4 @@ router.delete("/Agent/:id",protect,isAdmin,DeteleAgent)
 router.get('/getClient',protect,isAdmin,getClintes)
 router.delete('/deleteClients/:id',protect,isAdmin,deleteClients)
 
-router.get('/agent',protect,getAllTickets)
 module.exports=router;

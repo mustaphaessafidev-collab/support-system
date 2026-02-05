@@ -41,4 +41,18 @@ const getAllTickes=async(req,res)=>{
     }
 }
 
-module.exports={addTickets,getMyTickets,getAllTickes}
+const getTcketsByAgents=async(req,res)=>{
+    try{
+        const tickets= await Tickets.find({
+            status:'open',
+            agent:null
+        })
+
+        res.status(200).json({tickets})
+    }catch(error){
+        res.status(500).json({message:error.meesage})
+    }       
+}
+
+
+module.exports={addTickets,getMyTickets,getAllTickes,getTcketsByAgents}

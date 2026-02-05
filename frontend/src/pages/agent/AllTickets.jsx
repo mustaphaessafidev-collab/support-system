@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { getAllAgetTickets } from "../../services/Tickets"
 
 
 const AllTickets=()=>{
@@ -7,8 +8,10 @@ const AllTickets=()=>{
 
     const gettickts=async()=>{
         try{
-            
+
+            const res =await getAllAgetTickets()
             let  List=[]
+
             if(res?.data){
                 if(Array.isArray(res.data)){
                     List =res.data

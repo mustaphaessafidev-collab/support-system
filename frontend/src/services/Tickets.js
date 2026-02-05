@@ -18,3 +18,5 @@ export const addtickets=(data)=> API.post("/tickets/",data)
 export const getMytickts = () => API.get("/tickets/my");
 
 export const getAllTickes=() => API.get("/tickets/all");
+
+export const getAllAgetTickets=()=> API.get("tickets/agent")
