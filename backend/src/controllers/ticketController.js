@@ -35,10 +35,10 @@ const getMyTickets=async(req,res)=>{
 
 const getAllTickes=async(req,res)=>{
     try{
-        const tickets = await Tickets.find({})
+        const tickets = await Tickets.find({})//.populate('agent','name email')
         res.status(201).json({tickets})
     }catch(error){
-        res.sttatus(500).json({meesage:error.meesage})
+        res.status(500).json({meesage:error.meesage})
     }
 }
 

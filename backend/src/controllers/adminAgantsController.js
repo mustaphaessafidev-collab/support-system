@@ -64,4 +64,41 @@ const DeteleAgent=async(req,res)=>{
         res.status(500).json({message:'error in delete agent ',e})
     }
 }
-module.exports= {AddAgentgs,getAgent,DeteleAgent};
+
+const manageUsers=async(req,res)=>{
+    try{
+        
+        const {id}=req.params
+
+        const user =await Users.findById(id)
+
+        if(!user){
+          return res.status(401).json({message:'error in blocked'})
+        }
+        let s
+        if(user.status==='blocked') s='active'
+            
+        else if(user.status==='active')s='blocked'
+
+        else {
+            return res.status(400).json({ message: "Invalid user status" })
+        }
+
+        
+        
+        const users=await  Users.findByIdAndUpdate(
+            id,{
+                status:s
+            }
+            ,{new:true}
+        )
+        
+        res.status(201).json(users)
+
+    }catch(e){
+        res.status(500).json({message:e.message})
+    }
+}
+
+
+module.exports= {AddAgentgs,getAgent,DeteleAgent,manageUsers};

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { deleteAgent, getAgent } from '../../services/Admin';
+import { deleteAgent, getAgent, manageUsers } from '../../services/Admin';
+import { useNavigate } from 'react-router-dom';
 
 const AgentList = () => {
     const [data,setData]=useState([]);
-
+   const navigate=useNavigate()
 
     const fetAgent =async()=>{
         try{
@@ -31,7 +32,9 @@ const AgentList = () => {
     useEffect(()=>{
         fetAgent();
     },[])
-
+    const handleAddUser=()=>(
+        navigate("/admin/AddAgent")
+    )
     const deletea=async(id,name)=>{
         if(!window.confirm(`are you sure to delete ${name}`)) return;
 
@@ -41,40 +44,81 @@ const AgentList = () => {
         }catch(e){
             alert('error to delete agent tyr')
         }
+        console.log(id)
+    }
+
+    const ManageUsers=async(id,name)=>{
+            if(!window.confirm(`are you sure to blocked ${name}`)) return;
+    
+            try{
+                await manageUsers(id)
+                fetAgent();
+                alert(`cliter ${name} is blocked `)
+            }catch(e){
+                alert('eroor is not blocked cliter')
+            }
     }
     
 
-  return (
-    <>
-    <h1>List Agent </h1>
-    <div class="">
-    <table class='min-w-full table table-striped border border-gray-300'>
-        <thead>
-            <tr class='bg-gray-50'>
-                <th class="p-4 text-left text-sm font-semibold">Name</th>
-                <th class="p-4 text-left text-sm font-semibold">Email</th>
-                <th class="p-4 text-left text-sm font-semibold">Role</th>
-                <th class="p-4 text-left text-sm font-semibold">status</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-          {Array.isArray(data) && data.map((r) => (
-            <tr class="odd:bg-white even:bg-gray-50" key={r._id}>
-                <td class="p-4 text-sm">{r.name}</td>
-                <td class="p-4 text-sm">{r.email}</td>
-                <td class="p-4 text-sm">{r.role}</td>
-                <td class="p-4 text-sm">{r.status}</td>
-                <td class="p-4 text-sm"><button class="bg-red-500 text-white px-3 py-1 rounded-md text-xs md:text-sm" onClick={()=>deletea(r._id,r.name)}>Delete </button></td>
+return (
+    <div className="w-full">
+      {/* Header */}
+      <div className="mb-8 flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">List Agent</h1>
+          <p className="mt-2 text-gray-600">
+            A list of all the users in your account including their name, title, email and role.
+          </p>
+        </div>
+        <button
+          onClick={handleAddUser}
+          className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-2"
+        >
+          Add user
+        </button>
+      </div>
 
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="border-b border-gray-300">
+              <th className="px-0 py-4 text-left font-semibold text-gray-900 text-sm">Name</th>
+              <th className="px-4 py-4 text-left font-semibold text-gray-900 text-sm">Email</th>
+              <th className="px-4 py-4 text-left font-semibold text-gray-900 text-sm">Role</th>
+              <th className="px-4 py-4 text-left font-semibold text-gray-900 text-sm">Status</th>
+              <th className="px-4 py-4 text-right font-semibold text-gray-900 text-sm">Action</th>
             </tr>
+          </thead>
+          <tbody>
+            {data.map((user) => (
+              <tr key={user.id} className="border-b border-gray-200 hover:bg-gray-50">
+                <td className="px-0 py-6 text-gray-900 font-medium">{user.name}</td>
+                <td className="px-4 py-6 text-gray-600">{user.email}</td>
+                <td className="px-4 py-6 text-gray-600">{user.role}</td>
+                <td className="px-4 py-6 text-gray-600">{user.status}</td>
+                <td className="px-4 py-6 text-right">
+                  <button
+                    onClick={() => deletea(user._id,user.name)}
+                    className="text-red-600 hover:text-blue-800 mr-3 font-medium"
+                  >
+                    Delete
+                  </button>
+                
+                  <button
+                    onClick={() => ManageUsers(user._id,user.name)}
+                    className="text-blue-600 hover:text-blue-800 font-medium"
+                  >
+                    {user.status === "active" ? "blocked" : "active"}
+                  </button>
+                </td>
+              </tr>
             ))}
-            
-        </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
     </div>
+  );
+}
 
-    </>
-  )
-};
 export default AgentList;

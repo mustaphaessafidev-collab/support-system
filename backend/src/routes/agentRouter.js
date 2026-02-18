@@ -1,5 +1,5 @@
 const express =require('express')
-const  {AddAgentgs,getAgent, DeteleAgent}  = require('../controllers/adminAgantsController')
+const  {AddAgentgs,getAgent, DeteleAgent, manageUsers}  = require('../controllers/adminAgantsController')
 const protect = require('../middlewares/authMiddleware');
 const isAdmin = require('../middlewares/adminMiddleware');
 const { getClintes, deleteClients } = require('../controllers/adminClinteController');
@@ -15,5 +15,6 @@ router.delete("/Agent/:id",protect,isAdmin,DeteleAgent)
 
 router.get('/getClient',protect,isAdmin,getClintes)
 router.delete('/deleteClients/:id',protect,isAdmin,deleteClients)
+router.put('/managerusers/:id',protect,isAdmin,manageUsers)
 
 module.exports=router;
