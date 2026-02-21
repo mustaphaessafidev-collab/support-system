@@ -2,7 +2,7 @@ const express =require('express')
 
 const protect = require('../middlewares/authMiddleware');
 const isClient = require('../middlewares/isClientMiddleware');
-const { route } = require('./agentRouter');
+const { route } = require('./adminRouter');
 const { addTickets, getMyTickets, getAllTickes, getTcketsByAgents, TakingTicketsAgent, getMyTicketsAgenten } = require('../controllers/ticketController');
 const isAdmin = require('../middlewares/adminMiddleware');
 

@@ -7,8 +7,8 @@ export default function ClientSidebar(){
 
       <ul className="space-y-3">
         <li><Link to="/client/dashboard">Dashboard</Link></li>
-        <li><Link to="/client/AddTickets">Profile</Link></li>
-        <li><Link to="/client/MyTickets">my  Tickets</Link></li>
+        <li><Link to="/client/AddTickets">Add Ticktes</Link></li>
+        <li><Link to="/client/MyTickets">All Tickets</Link></li>
         
       </ul>
     </div>

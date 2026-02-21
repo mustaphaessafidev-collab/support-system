@@ -1,64 +1,96 @@
 import React, { useEffect, useState } from 'react';
 import { getMytickts } from '../../services/Tickets';
+import ChatBox from "../../components/ChatBox";
+
 const MyTickets = () => {
-    const [tickets,setTickets]=useState([])
+  const [tickets, setTickets] = useState([]);
+  const [selectedTicketId, setSelectedTicketId] = useState(null);
 
-    const getMyTickets =async()=>{
-        try{
+  // (حسب المشروع ديالك — عدل إذا عندك context)
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
 
-            const res=await getMytickts()
+  const getMyTickets = async () => {
+    try {
+      const res = await getMytickts();
 
-            let ListTickets =[]
-            if(res?.data){
-                if(Array.isArray(res.data)){
-                    ListTickets =res.data
-                }else if(res.data.tickets && Array.isArray(res.data.tickets)){
-                    ListTickets =res.data.tickets
-                }
-            }
-            setTickets(ListTickets);
-
-        }catch(e){
-            console.log("error in ticket client ",e)
-            setTickets([])
+      let ListTickets = [];
+      if (res?.data) {
+        if (Array.isArray(res.data)) {
+          ListTickets = res.data;
+        } else if (res.data.tickets && Array.isArray(res.data.tickets)) {
+          ListTickets = res.data.tickets;
         }
+      }
+      setTickets(ListTickets);
+    } catch (e) {
+      console.log("error in ticket client ", e);
+      setTickets([]);
     }
+  };
 
-    useEffect(()=>{
-        getMyTickets();
-    },[])
-
-
+  useEffect(() => {
+    getMyTickets();
+  }, []);
 
   return (
-    <>
-    <h1>List My Tickets</h1>
+    <div className="w-full">
 
-        <table className="min-w-full table table-striped border border-gray-300">
-  <thead>
-    <tr className="bg-gray-50">
-      <th className="p-4 text-left text-sm font-semibold">title</th>
-      <th className="p-4 text-left text-sm font-semibold">description</th>
-      <th className="p-4 text-left text-sm font-semibold">agent</th>
-      <th className="p-4 text-left text-sm font-semibold">status</th>
-    </tr>
-  </thead>
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold">List Tickets</h1>
+        <p className="text-gray-600">Click a ticket to open chat</p>
+      </div>
 
-        <tbody>
-  {Array.isArray(tickets) && tickets.map((r) => (
-    <tr className="odd:bg-white even:bg-gray-50" key={r._id}>
-      <td className="p-4 text-sm">{r.title}</td>
-      <td className="p-4 text-sm">{r.description}</td>
-      <td className="p-4 text-sm">
-        {r.agent ? r.agent : 'Not assigned'}
-      </td>
-      <td className="p-4 text-sm">{r.status}</td>
-    </tr>
-  ))}
-</tbody>
-
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="border-b">
+              <th>Title</th>
+              <th>Description</th>
+              <th>Agent</th>
+              <th>Status</th>
+              <th>Chat</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tickets.map((ticket) => (
+              <tr
+                key={ticket._id}
+                className="border-b hover:bg-gray-100 cursor-pointer"
+              >
+                <td>{ticket.title}</td>
+                <td>{ticket.description}</td>
+                <td>{ticket.agent || "Not assigned"}</td>
+                <td>{ticket.status}</td>
+                <td>
+                  <button
+                    onClick={() => setSelectedTicketId(ticket._id)}
+                    className="bg-blue-500 text-white px-3 py-1 rounded"
+                  >
+                    Open Chat
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-    </>
+      </div>
+
+      {/* Chat */}
+      {selectedTicketId && (
+        <div className="mt-6">
+          <ChatBox
+            ticketId={selectedTicketId}
+            token={token}
+            currentUser={user}
+          />
+        </div>
+      )}
+
+    </div>
   );
 };
+
 export default MyTickets;
